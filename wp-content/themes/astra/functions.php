@@ -277,6 +277,12 @@ function get_post_views($postID) {
 }
 
 
-
+add_filter( 'walker_nav_menu_start_el', 'add_description_to_menu', 10, 4 );
+function add_description_to_menu( $item_output, $item, $depth, $args ) {
+    if ( !empty( $item->description ) ) {
+        $item_output = str_replace( $args->link_after . '</a>', '<span class="menu-desc">' . $item->description . '</span>' . $args->link_after . '</a>', $item_output );
+    }
+    return $item_output;
+}
 
 
